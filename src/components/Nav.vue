@@ -1,6 +1,11 @@
 <template>
   <div class="nav">
-    <router-link to="/keep-account">记账</router-link>
+    <router-link to="/keep-account">
+      <svg>
+        <use xlink:href="#labels"/>
+      </svg>
+      记账
+    </router-link>
     |
     <router-link to="/labels">标签</router-link>
     |
@@ -9,6 +14,9 @@
 </template>
 
 <script lang="ts">
+import x from '@/assets/icons/labels.svg';
+
+console.log(x);
 export default {
   name: 'Nav'
 };
