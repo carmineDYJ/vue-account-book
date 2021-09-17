@@ -1,7 +1,8 @@
 <template>
   <div>
-    Keep Account
-    <Nav/>
+    <Layout>
+      <p>Keep Accounts</p>
+    </Layout>
   </div>
 </template>
 
@@ -12,5 +13,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 </style>
