@@ -3,13 +3,6 @@
     App
     <hr/>
     <router-view/>
-    <div>
-      <router-link to="/keep-account" >account</router-link>
-      |
-      <router-link to="/labels" >labels</router-link>
-      |
-      <router-link to="/statistics" >stats</router-link>
-    </div>
   </div>
 </template>
 
