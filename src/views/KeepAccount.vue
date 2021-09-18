@@ -25,7 +25,7 @@
       </div>
       <div class="calculator">
         <div class="calculator-output">100</div>
-        <div class="calculator-buttons">
+        <div class="calculator-buttons clearfix">
           <button>1</button>
           <button>2</button>
           <button>3</button>
@@ -37,8 +37,8 @@
           <button>7</button>
           <button>8</button>
           <button>9</button>
-          <button>OK</button>
-          <button>0</button>
+          <button class="calculator-ok-button">OK</button>
+          <button class="calculator-zero-button">0</button>
           <button>.</button>
         </div>
       </div>
@@ -120,6 +120,28 @@ export default {
       width: 100%;
       height: 4px;
       background: #333;
+    }
+  }
+}
+.calculator{
+  .calculator-output{
+    font-size: 36px;
+    font-family: Consolas, monospace;
+    padding: 9px 16px;
+    text-align: right;
+  }
+  .calculator-buttons{
+    > button{
+      width: 25%;
+      height: 64px;
+      float: left;
+      &.calculator-zero-button{
+        width: (25% * 2);
+      }
+      &.calculator-ok-button {
+        float: right;
+        height: (64px*2);
+      }
     }
   }
 }
