@@ -7,14 +7,14 @@
           <li>住</li>
           <li>行</li>
         </ul>
-        <div class="add-tag-button-wrapper">
-          <button>new Tag</button>
+        <div class="new-tag-button-wrapper">
+          <button>新增标签</button>
         </div>
       </div>
       <div>
         <label class="notes">
           <span class="notes-label-text">备注</span>
-          <input type="text">
+          <input type="text" placeholder="请在此处输入备注">
         </label>
       </div>
       <div>
@@ -52,4 +52,75 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.tags{
+  font-size: 14px;
+  padding: 16px;
+
+  > .cur-tags {
+    display: flex;
+    align-items: center;
+
+    > li {
+      background: #d9d9d9;
+      display: flex;
+      align-items: center;
+      $h: 24px;
+      height: $h;
+      border-radius: ($h/2);
+      padding: 0 16px;
+      margin-right: 12px;
+    }
+  }
+
+  > .new-tag-button-wrapper{
+    padding-top: 16px;
+    button {
+      background: transparent;
+      border: none;
+      color: #999;
+      border-bottom: 1px solid;
+      padding: 0 3px;
+    }
+  }
+}
+.notes{
+  font-size: 14px;
+  background: #f5f5f5;
+  display: flex;
+  padding-left: 16px;
+  align-items: center;
+  .notes-label-text{
+    padding-right: 16px;
+  }
+  input{
+    height: 64px;
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    padding-right: 16px;
+  }
+}
+.expenditure-income{
+  background: #c4c4c4;
+  display: flex;
+  text-align: center;
+  font-size: 24px;
+  > li{
+    width: 50%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    &.selected::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #333;
+    }
+  }
+}
 </style>
