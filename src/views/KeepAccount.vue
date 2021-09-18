@@ -123,6 +123,7 @@ export default {
     }
   }
 }
+@import "~@/assets/style/helper.scss";
 .calculator{
   .calculator-output{
     font-size: 36px;
@@ -131,6 +132,7 @@ export default {
     text-align: right;
   }
   .calculator-buttons{
+    @extend %clearfix;
     > button{
       width: 25%;
       height: 64px;
