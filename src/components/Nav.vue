@@ -4,8 +4,8 @@
       <Icon name="keep_account"/>
       记账
     </router-link>
-    <router-link to="/labels" class="item" active-class="selected">
-      <Icon name="label"/>
+    <router-link to="/tags" class="item" active-class="selected">
+      <Icon name="tag"/>
       标签
     </router-link>
     <router-link to="/statistics" class="item" active-class="selected">

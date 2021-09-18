@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter, {RouteConfig} from 'vue-router';
 import KeepAccount from '@/views/KeepAccount.vue';
-import Labels from '@/views/Labels.vue';
+import Tags from '@/views/Tags.vue';
 import Statistics from '@/views/Statistics.vue';
 import NotFound from '@/views/NotFound.vue';
 
@@ -17,8 +17,8 @@ const routes: Array<RouteConfig> = [
     component: KeepAccount,
   },
   {
-    path: '/labels',
-    component: Labels,
+    path: '/tags',
+    component: Tags,
   },
   {
     path: '/statistics',
