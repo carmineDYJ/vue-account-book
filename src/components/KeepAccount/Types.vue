@@ -1,15 +1,30 @@
 <template>
   <div>
     <ul class="expenditure-income">
-      <li class="selected">支出</li>
-      <li>收入</li>
+      <li v-bind:class="type === 'expenditure' && 'selected'"
+          v-on:click="selectType('expenditure')">支出</li>
+      <li v-bind:class="type === 'income' && 'selected'"
+          v-on:click="selectType('income')">收入</li>
     </ul>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
-  name: 'ExpenditureIncome'
+  name: 'Types',
+  data() {
+    return {
+      type: 'expenditure' // 支出
+    }
+  },
+  methods: {
+    selectType(type) {
+      if (type !== 'expenditure' && type !== 'income') {
+        throw new Error('There are only two types: expenditure and income');
+      }
+      this.type = type;
+    }
+  }
 };
 </script>
 

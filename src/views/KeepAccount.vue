@@ -1,7 +1,7 @@
 <template>
     <Layout class-prefix="layout">
       <Calculator/>
-      <ExpenditureIncome/>
+      <Types/>
       <Notes/>
       <Tags/>
     </Layout>
@@ -9,12 +9,12 @@
 
 <script lang="ts">
 import Calculator from '@/components/KeepAccount/Calculator.vue';
-import ExpenditureIncome from '@/components/KeepAccount/ExpenditureIncome.vue';
+import Types from '@/components/KeepAccount/Types.vue';
 import Notes from '@/components/KeepAccount/Notes.vue';
 import Tags from '@/components/KeepAccount/Tags.vue';
 export default {
   name: 'KeepAccount',
-  components: {Tags, Notes, ExpenditureIncome, Calculator},
+  components: {Tags, Notes, Types, Calculator},
 };
 </script>
 
