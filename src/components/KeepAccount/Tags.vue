@@ -1,29 +1,23 @@
 <template>
-    <Layout class-prefix="layout">
-      <Calculator/>
-      <ExpenditureIncome/>
-      <Notes/>
-      <Tags/>
-    </Layout>
+  <div class="tags">
+    <div class="new-tag-button-wrapper">
+      <button>新增标签</button>
+    </div>
+    <ul class="cur-tags">
+      <li>衣</li>
+      <li>食</li>
+      <li>住</li>
+      <li>行</li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
-import Calculator from '@/components/KeepAccount/Calculator.vue';
-import ExpenditureIncome from '@/components/KeepAccount/ExpenditureIncome.vue';
-import Notes from '@/components/KeepAccount/Notes.vue';
-import Tags from '@/components/KeepAccount/Tags.vue';
 export default {
-  name: 'KeepAccount',
-  components: {Tags, Notes, ExpenditureIncome, Calculator},
+  name: 'Tags'
 };
 </script>
 
-<style lang="scss">
-.layout-content{
-  display: flex;
-  flex-direction: column-reverse;
-}
-</style>
 <style scoped lang="scss">
 .tags{
   font-size: 14px;
