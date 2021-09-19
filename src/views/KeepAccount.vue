@@ -3,11 +3,11 @@
       <Calculator/>
       <Types/>
       <Notes/>
-      <Tags/>
+      <Tags v-bind:all-tags="allTags"/>
     </Layout>
 </template>
 
-<script lang="ts">
+<script>
 import Calculator from '@/components/KeepAccount/Calculator.vue';
 import Types from '@/components/KeepAccount/Types.vue';
 import Notes from '@/components/KeepAccount/Notes.vue';
@@ -15,6 +15,11 @@ import Tags from '@/components/KeepAccount/Tags.vue';
 export default {
   name: 'KeepAccount',
   components: {Tags, Notes, Types, Calculator},
+  data(){
+    return{
+      allTags:['衣','食','住','行']
+    }
+  }
 };
 </script>
 

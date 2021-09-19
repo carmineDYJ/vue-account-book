@@ -4,18 +4,30 @@
       <button>新增标签</button>
     </div>
     <ul class="cur-tags">
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
+      <li v-for="tag in allTags" v-bind:key="tag"
+          v-bind:class="{selected: selectedTags.indexOf(tag) >= 0}"
+          v-on:click="toggleTag(tag)">{{tag}}</li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: 'Tags'
-};
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
+
+@Component
+export default class Tags extends Vue{
+  @Prop() allTags: string[] | undefined;
+  selectedTags: string[] = [];
+  toggleTag(tag){
+    const tagIndex = this.selectedTags.indexOf(tag);
+    if (tagIndex === -1){
+      this.selectedTags.push(tag);
+    } else {
+      this.selectedTags.splice(tagIndex, 1);
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -31,7 +43,8 @@ export default {
     align-items: center;
 
     > li {
-      background: #d9d9d9;
+      $tag-background: #d9d9d9;
+      background: $tag-background;
       display: flex;
       align-items: center;
       $h: 24px;
@@ -39,6 +52,11 @@ export default {
       border-radius: ($h/2);
       padding: 0 16px;
       margin-right: 12px;
+
+      &.selected{
+        background: darken($tag-background, 50%);
+        color: white;
+      }
     }
   }
 
