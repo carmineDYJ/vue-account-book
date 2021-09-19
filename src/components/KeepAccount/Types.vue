@@ -2,45 +2,46 @@
   <div>
     <ul class="expenditure-income">
       <li v-bind:class="type === 'expenditure' && 'selected'"
-          v-on:click="selectType('expenditure')">支出</li>
+          v-on:click="selectType('expenditure')">支出
+      </li>
       <li v-bind:class="type === 'income' && 'selected'"
-          v-on:click="selectType('income')">收入</li>
+          v-on:click="selectType('income')">收入
+      </li>
     </ul>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Types',
-  data() {
-    return {
-      type: 'expenditure' // 支出
+<script lang="ts">
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+
+@Component
+export default class Types extends Vue {
+  type = 'expenditure'; // 支出
+  selectType(type: string) {
+    if (type !== 'expenditure' && type !== 'income') {
+      throw new Error('There are only two types: expenditure and income');
     }
-  },
-  methods: {
-    selectType(type) {
-      if (type !== 'expenditure' && type !== 'income') {
-        throw new Error('There are only two types: expenditure and income');
-      }
-      this.type = type;
-    }
+    this.type = type;
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
-.expenditure-income{
+.expenditure-income {
   background: #c4c4c4;
   display: flex;
   text-align: center;
   font-size: 24px;
-  > li{
+
+  > li {
     width: 50%;
     height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+
     &.selected::after {
       content: '';
       position: absolute;
