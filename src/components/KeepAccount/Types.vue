@@ -17,7 +17,7 @@ import {Component} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
-  type = 'income'; // 支出
+  type = 'expenditure'; // 支出
   selectType(type: string) {
     if (type !== 'expenditure' && type !== 'income') {
       throw new Error('There are only two types: expenditure and income');
