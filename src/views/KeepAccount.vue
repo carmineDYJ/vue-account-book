@@ -1,26 +1,43 @@
 <template>
     <Layout class-prefix="layout">
-      <Calculator/>
-      <Types/>
-      <Notes/>
-      <Tags v-bind:all-tags="allTags"/>
+      {{account}}
+      <Calculator v-bind:value.sync="account.sum"/>
+      <Types v-bind:value.sync="account.type"/>
+      <Notes v-on:update:value="onNotesContent"/>
+      <Tags v-bind:all-tags.sync="allTags" v-on:update:value="onUpdateSelectedTags"/>
     </Layout>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
 import Calculator from '@/components/KeepAccount/Calculator.vue';
 import Types from '@/components/KeepAccount/Types.vue';
 import Notes from '@/components/KeepAccount/Notes.vue';
 import Tags from '@/components/KeepAccount/Tags.vue';
-export default {
-  name: 'KeepAccount',
+
+type Account = {
+  tags: string[],
+  notes: string,
+  type: string,
+  sum: number
+}
+
+@Component({
   components: {Tags, Notes, Types, Calculator},
-  data(){
-    return{
-      allTags:['衣','食','住','行']
-    }
+})
+export default class KeepAccount extends Vue{
+  allTags = ['衣','食','住','行'];
+
+  account: Account = {tags:[], notes: '', type: 'expenditure', sum:0};
+
+  onUpdateSelectedTags(value: string[]){
+    this.account.tags = value;
   }
-};
+  onNotesContent(value: string){
+    this.account.notes = value;
+  }
+}
 </script>
 
 <style lang="scss">

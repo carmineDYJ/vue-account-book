@@ -1,10 +1,10 @@
 <template>
   <div>
     <ul class="expenditure-income">
-      <li v-bind:class="type === 'expenditure' && 'selected'"
+      <li v-bind:class="value === 'expenditure' && 'selected'"
           v-on:click="selectType('expenditure')">支出
       </li>
-      <li v-bind:class="type === 'income' && 'selected'"
+      <li v-bind:class="value === 'income' && 'selected'"
           v-on:click="selectType('income')">收入
       </li>
     </ul>
@@ -13,16 +13,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
-  type = 'expenditure'; // 支出
+  @Prop() readonly value!: string;
   selectType(type: string) {
     if (type !== 'expenditure' && type !== 'income') {
       throw new Error('There are only two types: expenditure and income');
     }
-    this.type = type;
+    this.$emit('update:value', type);
   }
 }
 </script>

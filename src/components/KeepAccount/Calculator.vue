@@ -22,11 +22,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Calculator extends Vue{
-  output = '0';
+  @Prop() readonly value!: number;
+  output = this.value.toString();
+
   inputContent(event: MouseEvent){
     const button = (event.target as HTMLButtonElement)
     const input = button.textContent!;
@@ -46,12 +48,15 @@ export default class Calculator extends Vue{
   }
   backspaceContent(){
     this.output = this.output.substr(0, this.output.length - 1);
+    if (this.output.length === 0) {
+      this.output = '0';
+    }
   }
   clearContent(){
     this.output = '0';
   }
   ok(){
-    return;
+    this.$emit('update:value', parseFloat(this.output));
   }
 }
 </script>

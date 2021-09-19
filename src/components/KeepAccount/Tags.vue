@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
-    <div class="new-tag-button-wrapper">
-      <button>新增标签</button>
+    <div class="add-tag-button-wrapper">
+      <button v-on:click="addTag">新增标签</button>
     </div>
     <ul class="cur-tags">
       <li v-for="tag in allTags" v-bind:key="tag"
@@ -17,14 +17,21 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Tags extends Vue{
-  @Prop() allTags: string[] | undefined;
+  @Prop(Array) readonly allTags: string[] | undefined;
   selectedTags: string[] = [];
-  toggleTag(tag){
+  toggleTag(tag: string){
     const tagIndex = this.selectedTags.indexOf(tag);
     if (tagIndex === -1){
       this.selectedTags.push(tag);
     } else {
       this.selectedTags.splice(tagIndex, 1);
+    }
+    this.$emit('update:value', this.selectedTags);
+  }
+  addTag(){
+    const newTag = window.prompt('请输入标签名')
+    if (newTag !== null && newTag !== ''){
+      this.$emit('update:allTags', [...this.allTags, newTag]);
     }
   }
 }
@@ -60,7 +67,7 @@ export default class Tags extends Vue{
     }
   }
 
-  > .new-tag-button-wrapper{
+  > .add-tag-button-wrapper{
     padding-top: 16px;
     button {
       background: transparent;
