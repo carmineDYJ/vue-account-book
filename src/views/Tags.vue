@@ -2,8 +2,8 @@
   <div>
     <Layout>
       <ol class="tagList">
-        <li v-for="tag in allTags" v-bind:key="tag">
-          <span>{{ tag }}</span>
+        <li v-for="tag in allTags" v-bind:key="tag.tagId">
+          <span>{{ tag.tagName }}</span>
           <Icon name="right"/>
         </li>
       </ol>
@@ -17,7 +17,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import tagModel from '@/models/tagModel';
+import tagModel from '@/models/tagModel.ts';
 tagModel.fetch();
 
 @Component

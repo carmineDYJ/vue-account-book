@@ -4,9 +4,9 @@
       <button v-on:click="addTag">新增标签</button>
     </div>
     <ul class="cur-tags">
-      <li v-for="tag in allTags" v-bind:key="tag"
+      <li v-for="tag in allTags" v-bind:key="tag.tagId"
           v-bind:class="{selected: selectedTags.indexOf(tag) >= 0}"
-          v-on:click="toggleTag(tag)">{{tag}}</li>
+          v-on:click="toggleTag(tag)">{{tag.tagName}}</li>
     </ul>
   </div>
 </template>
@@ -14,12 +14,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import tagModel from '@/models/tagModel';
+import tagModel from '@/models/tagModel.ts';
 
 
 @Component
 export default class Tags extends Vue{
-  @Prop({default: []}) readonly allTags!: string[];
+  @Prop({default: []}) readonly allTags!: Tag[];
   selectedTags: string[] = [];
   toggleTag(tag: string){
     const tagIndex = this.selectedTags.indexOf(tag);
