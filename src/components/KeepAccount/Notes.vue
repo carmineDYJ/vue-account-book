@@ -25,7 +25,6 @@ export default class Notes extends Vue{
 <style scoped lang="scss">
 .notes{
   font-size: 14px;
-  background: #f5f5f5;
   display: flex;
   padding-left: 16px;
   align-items: center;

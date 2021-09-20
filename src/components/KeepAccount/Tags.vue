@@ -52,6 +52,7 @@ export default class Tags extends Vue{
   padding: 16px;
   display: flex;
   flex-direction: column-reverse;
+  background: white;
 
   > .cur-tags {
     display: flex;
@@ -68,6 +69,7 @@ export default class Tags extends Vue{
       border-radius: ($h/2);
       padding: 0 16px;
       margin-right: 12px;
+      margin-top: 6px;
 
       &.selected{
         background: darken($tag-background, 50%);

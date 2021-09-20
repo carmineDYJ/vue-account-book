@@ -31,7 +31,11 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '*',
-    component: NotFound,
+    redirect: '/404',
+  },
+  {
+    path: '/404',
+    component: NotFound
   }
 ];
 

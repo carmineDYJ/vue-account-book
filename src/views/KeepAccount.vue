@@ -59,8 +59,10 @@ export default class KeepAccount extends Vue{
 </style>
 <style scoped lang="scss">
 .tags{
+  flex-grow: 1;
+  overflow: auto;
   font-size: 14px;
-  padding: 16px;
+  padding: 0 16px 16px 16px;
   display: flex;
   flex-direction: column-reverse;
 

@@ -72,6 +72,7 @@ export default class Calculator extends Vue{
     font-family: Consolas, monospace;
     padding: 9px 16px;
     text-align: right;
+    background: white;
   }
   .calculator-buttons{
     @extend %clearfix;

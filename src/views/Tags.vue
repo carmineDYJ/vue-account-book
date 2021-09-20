@@ -2,10 +2,11 @@
   <div>
     <Layout>
       <ol class="tagList">
-        <li v-for="tag in allTags" v-bind:key="tag.tagId">
+        <router-link class="tag" v-for="tag in allTags" v-bind:key="tag.tagId"
+        v-bind:to="`/tags/edit/${tag.tagId}`">
           <span>{{ tag.tagName }}</span>
           <Icon name="right"/>
-        </li>
+        </router-link>
       </ol>
       <div class="add-tag-button-wrapper">
         <button class="add-tag-button" v-on:click="addTag">新建标签</button>
@@ -44,7 +45,7 @@ export default class Tags extends Vue{
   background: white;
   font-size: 16px;
   padding-left: 16px;
-  > li{
+  > .tag{
     min-height: 44px;
     display: flex;
     align-items: center;
