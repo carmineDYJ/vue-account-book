@@ -1,6 +1,5 @@
 <template>
     <Layout class-prefix="layout">
-      {{allAccounts}}
       <Calculator v-bind:value.sync="account.sum" v-on:submit="saveAccount"/>
       <Types v-bind:value.sync="account.type"/>
       <Notes v-on:update:value="onNotesContent"/>
@@ -16,23 +15,17 @@ import Calculator from '@/components/KeepAccount/Calculator.vue';
 import Types from '@/components/KeepAccount/Types.vue';
 import Notes from '@/components/KeepAccount/Notes.vue';
 import Tags from '@/components/KeepAccount/Tags.vue';
+import model from '@/model.ts';
 
-type Account = {
-  tags: string[],
-  notes: string,
-  type: string,
-  sum: number,
-  time: Date,
-}
+const allAccounts = model.fetch();
 
 @Component({
   components: {Tags, Notes, Types, Calculator},
 })
 export default class KeepAccount extends Vue{
   allTags = ['衣','食','住','行'];
-
   account: Account = {tags:[], notes: '', type: 'expenditure', sum:0, time: new Date(0)};
-  allAccounts: Account[] = JSON.parse(window.localStorage.getItem('allAccounts') || '[]');
+  allAccounts: Account[] = allAccounts;
 
   onUpdateSelectedTags(value: string[]){
     this.account.tags = value;
@@ -50,7 +43,7 @@ export default class KeepAccount extends Vue{
 
   @Watch('allAccounts')
   onAllAccountsChange(){
-    localStorage.setItem('allAccounts', JSON.stringify(this.allAccounts));
+    model.save(this.allAccounts);
     this.account.sum = 0; // 提交后重置金额
   }
 }
