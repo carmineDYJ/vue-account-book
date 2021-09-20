@@ -31,7 +31,11 @@ export default class Tags extends Vue{
   addTag(){
     const newTag = window.prompt('请输入标签名')
     if (newTag !== null && newTag !== ''){
-      this.$emit('update:allTags', [...this.allTags, newTag]);
+      if (this.allTags.indexOf(newTag) === -1){
+        this.$emit('update:allTags', [...this.allTags, newTag]);
+      } else {
+        console.log("重复了！！！！！");
+      }
     }
   }
 }

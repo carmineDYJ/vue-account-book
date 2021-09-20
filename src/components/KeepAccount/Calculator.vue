@@ -57,6 +57,7 @@ export default class Calculator extends Vue{
   }
   ok(){
     this.$emit('update:value', parseFloat(this.output));
+    this.$emit('submit', parseFloat(this.output));
   }
 }
 </script>

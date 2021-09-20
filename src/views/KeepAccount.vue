@@ -1,7 +1,7 @@
 <template>
     <Layout class-prefix="layout">
       {{account}}
-      <Calculator v-bind:value.sync="account.sum"/>
+      <Calculator v-bind:value.sync="account.sum" v-on:submit="saveAccount"/>
       <Types v-bind:value.sync="account.type"/>
       <Notes v-on:update:value="onNotesContent"/>
       <Tags v-bind:all-tags.sync="allTags" v-on:update:value="onUpdateSelectedTags"/>
@@ -10,7 +10,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+const cloneDeep = require('lodash/cloneDeep');
+import {Component, Watch} from 'vue-property-decorator';
 import Calculator from '@/components/KeepAccount/Calculator.vue';
 import Types from '@/components/KeepAccount/Types.vue';
 import Notes from '@/components/KeepAccount/Notes.vue';
@@ -30,12 +31,24 @@ export default class KeepAccount extends Vue{
   allTags = ['衣','食','住','行'];
 
   account: Account = {tags:[], notes: '', type: 'expenditure', sum:0};
+  allAccounts: Account[] = [];
 
   onUpdateSelectedTags(value: string[]){
     this.account.tags = value;
   }
   onNotesContent(value: string){
     this.account.notes = value;
+  }
+  saveAccount(){
+    // use lodash for deep cloning
+    const curAccount = cloneDeep(this.account);
+    this.allAccounts.push(curAccount);
+    console.log(this.account);
+  }
+
+  @Watch('allAccounts')
+  onAllAccountsChange(){
+    localStorage.setItem('allAccounts', JSON.stringify(this.allAccounts));
   }
 }
 </script>
