@@ -1,6 +1,9 @@
 <template>
   <Layout>
-
+    <div>
+      <Icon name="left"/>
+      <span>编辑标签</span>
+    </div>
   </Layout>
 </template>
 
