@@ -14,6 +14,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
+import tagModel from '@/models/tagModel';
+
 
 @Component
 export default class Tags extends Vue{
@@ -29,12 +31,15 @@ export default class Tags extends Vue{
     this.$emit('update:value', this.selectedTags);
   }
   addTag(){
-    const newTag = window.prompt('请输入标签名')
+    const newTag = window.prompt('请输入标签名');
+
     if (newTag !== null && newTag !== ''){
-      if (this.allTags.indexOf(newTag) === -1){
-        this.$emit('update:allTags', [...this.allTags, newTag]);
-      } else {
-        console.log("重复了！！！！！");
+      try {
+        tagModel.add(newTag);
+      }catch (error){
+        if(error.message === 'duplicated tag') {
+          window.alert('此标签已存在');
+        }
       }
     }
   }

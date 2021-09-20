@@ -15,15 +15,17 @@ import Calculator from '@/components/KeepAccount/Calculator.vue';
 import Types from '@/components/KeepAccount/Types.vue';
 import Notes from '@/components/KeepAccount/Notes.vue';
 import Tags from '@/components/KeepAccount/Tags.vue';
-import model from '@/model.ts';
+import accountModel from '@/models/accountModel.ts';
+import tagModel from '@/models/tagModel.ts';
+tagModel.fetch();
 
-const allAccounts = model.fetch();
+const allAccounts = accountModel.fetch();
 
 @Component({
   components: {Tags, Notes, Types, Calculator},
 })
 export default class KeepAccount extends Vue{
-  allTags = ['衣','食','住','行'];
+  allTags = tagModel.allTags;
   account: Account = {tags:[], notes: '', type: 'expenditure', sum:0, time: new Date(0)};
   allAccounts: Account[] = allAccounts;
 
@@ -43,7 +45,7 @@ export default class KeepAccount extends Vue{
 
   @Watch('allAccounts')
   onAllAccountsChange(){
-    model.save(this.allAccounts);
+    accountModel.save(this.allAccounts);
     this.account.sum = 0; // 提交后重置金额
   }
 }
