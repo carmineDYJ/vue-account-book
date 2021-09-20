@@ -49,15 +49,16 @@ export default class Calculator extends Vue{
   backspaceContent(){
     this.output = this.output.substr(0, this.output.length - 1);
     if (this.output.length === 0) {
-      this.output = '0';
+      this.output = this.value.toString();
     }
   }
   clearContent(){
-    this.output = '0';
+    this.output = this.value.toString();
   }
   ok(){
     this.$emit('update:value', parseFloat(this.output));
     this.$emit('submit', parseFloat(this.output));
+    this.output = this.value.toString();
   }
 }
 </script>

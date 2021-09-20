@@ -1,6 +1,6 @@
 <template>
     <Layout class-prefix="layout">
-      {{account}}
+      {{allAccounts}}
       <Calculator v-bind:value.sync="account.sum" v-on:submit="saveAccount"/>
       <Types v-bind:value.sync="account.type"/>
       <Notes v-on:update:value="onNotesContent"/>
@@ -21,7 +21,8 @@ type Account = {
   tags: string[],
   notes: string,
   type: string,
-  sum: number
+  sum: number,
+  time: Date,
 }
 
 @Component({
@@ -30,8 +31,8 @@ type Account = {
 export default class KeepAccount extends Vue{
   allTags = ['衣','食','住','行'];
 
-  account: Account = {tags:[], notes: '', type: 'expenditure', sum:0};
-  allAccounts: Account[] = [];
+  account: Account = {tags:[], notes: '', type: 'expenditure', sum:0, time: new Date(0)};
+  allAccounts: Account[] = JSON.parse(window.localStorage.getItem('allAccounts') || '[]');
 
   onUpdateSelectedTags(value: string[]){
     this.account.tags = value;
@@ -41,7 +42,8 @@ export default class KeepAccount extends Vue{
   }
   saveAccount(){
     // use lodash for deep cloning
-    const curAccount = cloneDeep(this.account);
+    const curAccount: Account = cloneDeep(this.account);
+    curAccount.time = new Date();
     this.allAccounts.push(curAccount);
     console.log(this.account);
   }
@@ -49,6 +51,7 @@ export default class KeepAccount extends Vue{
   @Watch('allAccounts')
   onAllAccountsChange(){
     localStorage.setItem('allAccounts', JSON.stringify(this.allAccounts));
+    this.account.sum = 0; // 提交后重置金额
   }
 }
 </script>
