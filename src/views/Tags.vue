@@ -9,7 +9,7 @@
         </router-link>
       </ol>
       <div class="add-tag-button-wrapper">
-        <button class="add-tag-button" v-on:click="addTag">新建标签</button>
+        <GeneralButton v-on:click="addTag">新建标签</GeneralButton>
       </div>
     </Layout>
   </div>
@@ -19,9 +19,11 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import tagModel from '@/models/tagModel.ts';
+import GeneralButton from '@/components/GeneralButton.vue';
 tagModel.fetch();
-
-@Component
+@Component({
+  components: {GeneralButton}
+})
 export default class Tags extends Vue{
   allTags = tagModel.allTags;
   addTag(){
@@ -59,17 +61,9 @@ export default class Tags extends Vue{
     }
   }
 }
-.add-tag-button{
-  background: #767676;
-  color: white;
-  border-radius: 4px;
-  border: none;
-  height: 40px;
-  padding: 0 16px;
-  &-wrapper{
-    text-align: center;
-    padding: 16px;
-    margin-top: 28px;
-  }
+.add-tag-button-wrapper{
+  text-align: center;
+  padding: 16px;
+  margin-top: 28px;
 }
 </style>

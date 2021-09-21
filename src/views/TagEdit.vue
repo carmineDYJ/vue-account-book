@@ -1,10 +1,16 @@
 <template>
   <Layout>
-    <div>
-      <Icon name="left"/>
-      <span>编辑标签</span>
+    <div class="back-nav">
+      <Icon class="left-icon" name="left"/>
+      <span class="title">编辑标签</span>
+      <span class="right-icon"></span>
     </div>
-    <Notes field-name="标签名" placeholder="请输入新的标签名"/>
+    <div class="input-item-wrapper">
+      <InputItem field-name="标签名" placeholder="请输入新的标签名"/>
+    </div>
+    <div class="delete-tag-button-wrapper">
+      <GeneralButton>删除标签</GeneralButton>
+    </div>
   </Layout>
 </template>
 
@@ -12,9 +18,10 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import tagModel from '@/models/tagModel.ts';
-import Notes from '@/components/Notes.vue';
+import InputItem from '@/components/InputItem.vue';
+import GeneralButton from '@/components/GeneralButton.vue';
 @Component({
-  components: {Notes}
+  components: {GeneralButton, InputItem}
 })
 export default class TagEdit extends Vue{
   created(){
@@ -22,10 +29,7 @@ export default class TagEdit extends Vue{
     tagModel.fetch();
     const allTags = tagModel.allTags;
     const tag = allTags.filter(tag => tag.tagId === id)[0];
-    console.log(tag);
-    if (tag) {
-      console.log(id);
-    } else{
+    if (!tag) {
       this.$router.replace('/404');
     }
   }
@@ -33,5 +37,30 @@ export default class TagEdit extends Vue{
 </script>
 
 <style scoped lang="scss">
-
+.back-nav{
+  text-align: center;
+  font-size: 16px;
+  padding: 12px 16px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  > .left-icon{
+    height: 24px;
+    width: 24px;
+  }
+  > .right-icon{
+    height: 24px;
+    width: 24px;
+  }
+}
+.input-item-wrapper{
+  background: white;
+  margin-top: 8px;
+}
+.delete-tag-button-wrapper{
+  text-align: center;
+  padding: 16px;
+  margin-top: 28px;
+}
 </style>
