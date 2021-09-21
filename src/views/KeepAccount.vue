@@ -2,7 +2,7 @@
     <Layout class-prefix="layout">
       <Calculator v-bind:value.sync="account.sum" v-on:submit="saveAccount"/>
       <Types v-bind:value.sync="account.type"/>
-      <Notes v-on:update:value="onNotesContent"/>
+      <Notes field-name="备注" placeholder="请在此处输入备注" v-on:update:value="onNotesContent"/>
       <Tags v-bind:all-tags.sync="allTags" v-on:update:value="onUpdateSelectedTags"/>
     </Layout>
 </template>
@@ -13,7 +13,7 @@ const cloneDeep = require('lodash/cloneDeep');
 import {Component, Watch} from 'vue-property-decorator';
 import Calculator from '@/components/KeepAccount/Calculator.vue';
 import Types from '@/components/KeepAccount/Types.vue';
-import Notes from '@/components/KeepAccount/Notes.vue';
+import Notes from '@/components/Notes.vue';
 import Tags from '@/components/KeepAccount/Tags.vue';
 import accountModel from '@/models/accountModel.ts';
 import tagModel from '@/models/tagModel.ts';
