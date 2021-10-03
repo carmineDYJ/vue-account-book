@@ -11,7 +11,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-const cloneDeep = require('lodash/cloneDeep');
 import {Component, Watch} from 'vue-property-decorator';
 import Calculator from '@/components/KeepAccount/Calculator.vue';
 import Types from '@/components/KeepAccount/Types.vue';
@@ -38,15 +37,12 @@ export default class KeepAccount extends Vue{
     this.account.notes = value;
   }
   saveAccount(){
-    // use lodash for deep cloning
-    const curAccount: Account = cloneDeep(this.account);
-    curAccount.time = new Date();
-    this.allAccounts.push(curAccount);
+    accountModel.add(this.account);
   }
 
   @Watch('allAccounts')
   onAllAccountsChange(){
-    accountModel.save(this.allAccounts);
+    accountModel.save();
     this.account.sum = 0; // 提交后重置金额
   }
 }
