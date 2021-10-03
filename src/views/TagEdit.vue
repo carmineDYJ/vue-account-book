@@ -1,15 +1,17 @@
 <template>
   <Layout>
     <div class="back-nav">
-      <Icon class="left-icon" name="left"/>
+      <Icon class="left-icon" name="left" v-on:click="backToTags"/>
       <span class="title">编辑标签</span>
       <span class="right-icon"></span>
     </div>
     <div class="input-item-wrapper">
-      <InputItem field-name="标签名" placeholder="请输入新的标签名"/>
+      <InputItem v-bind:value="tag.tagName"
+                 v-on:update:value="updateTag"
+                 field-name="标签名" placeholder="请输入新的标签名"/>
     </div>
     <div class="delete-tag-button-wrapper">
-      <GeneralButton>删除标签</GeneralButton>
+      <GeneralButton v-on:click="removeTag(tag.tagId)">删除标签</GeneralButton>
     </div>
   </Layout>
 </template>
@@ -24,6 +26,8 @@ import GeneralButton from '@/components/GeneralButton.vue';
   components: {GeneralButton, InputItem}
 })
 export default class TagEdit extends Vue{
+  tag?:{ tagId: number, tagName: string };
+
   created(){
     const id = parseInt(this.$route.params.id);
     tagModel.fetch();
@@ -32,6 +36,25 @@ export default class TagEdit extends Vue{
     if (!tag) {
       this.$router.replace('/404');
     }
+    this.tag = tag;
+  }
+
+  updateTag(newTagName: string){
+    if(this.tag){
+      tagModel.update(this.tag.tagId, newTagName);
+    }
+  }
+
+  removeTag(tagId: number){
+    const deleteConfirm = window.confirm('确认要删除该标签吗？');
+    if (deleteConfirm === true) {
+      tagModel.remove(tagId);
+      this.backToTags();
+    }
+  }
+
+  backToTags(){
+    this.$router.replace('/tags');
   }
 }
 </script>
