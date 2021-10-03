@@ -20,12 +20,12 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import tagModel from '@/models/tagModel.ts';
 import GeneralButton from '@/components/GeneralButton.vue';
-tagModel.fetch();
+
 @Component({
   components: {GeneralButton}
 })
 export default class Tags extends Vue{
-  allTags = tagModel.allTags;
+  allTags = window.allTags;
   addTag(){
     const newTag = window.prompt('请输入标签名');
 

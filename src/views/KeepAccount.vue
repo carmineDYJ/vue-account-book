@@ -17,8 +17,6 @@ import Types from '@/components/KeepAccount/Types.vue';
 import InputItem from '@/components/InputItem.vue';
 import Tags from '@/components/KeepAccount/Tags.vue';
 import accountModel from '@/models/accountModel.ts';
-import tagModel from '@/models/tagModel.ts';
-tagModel.fetch();
 
 const allAccounts = accountModel.fetch();
 
@@ -26,7 +24,7 @@ const allAccounts = accountModel.fetch();
   components: {Tags, InputItem, Types, Calculator},
 })
 export default class KeepAccount extends Vue{
-  allTags = tagModel.allTags;
+  allTags = window.allTags;
   account: Account = {tags:[], notes: '', type: 'expenditure', sum:0, time: new Date(0)};
   allAccounts: Account[] = allAccounts;
 
