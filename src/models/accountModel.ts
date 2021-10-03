@@ -1,10 +1,12 @@
 const localStorageKeyName = 'allAccounts';
 const accountModel = {
+  allAccounts: [] as Account[],
   fetch(){
-    return JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as Account[];
+    this.allAccounts = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as Account[];
+    return this.allAccounts;
   },
-  save(allAccounts: Account[]){
-    localStorage.setItem(localStorageKeyName, JSON.stringify(allAccounts));
+  save(){
+    localStorage.setItem(localStorageKeyName, JSON.stringify(this.allAccounts));
   }
 };
 export default accountModel;

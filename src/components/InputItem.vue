@@ -5,7 +5,7 @@
       <input type="text"
              v-bind:value="value"
              v-on:input="onValueChanged($event.target.value)"
-             v-bind:placeholder="this.placeholder">
+             v-bind:placeholder="placeholder">
     </label>
   </div>
 </template>
@@ -21,7 +21,6 @@ export default class InputItem extends Vue{
   @Prop({required:true}) fieldName!: string;
   @Prop() placeholder?: string;
 
-  @Watch('value')
   onValueChanged(value: string){
     this.$emit('update:value', value);
   }
