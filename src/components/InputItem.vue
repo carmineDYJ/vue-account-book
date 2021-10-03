@@ -1,8 +1,10 @@
 <template>
   <div>
-    <label class="notes">
-      <span class="notes-label-text">{{ this.fieldName }}</span>
-      <input type="text" v-model="notesContent"
+    <label class="input-item">
+      <span class="input-item-text">{{ this.fieldName }}</span>
+      <input type="text"
+             v-bind:value="value"
+             v-on:input="onValueChanged($event.target.value)"
              v-bind:placeholder="this.placeholder">
     </label>
   </div>
@@ -13,24 +15,26 @@ import Vue from 'vue';
 import {Component, Prop, Watch} from 'vue-property-decorator';
 
 @Component
-export default class Notes extends Vue{
-  @Prop({required:true}) fieldName: string;
-  @Prop({default: ''}) placeholder: string;
-  notesContent = '';
-  @Watch('notesContent')
-  onNotesContentChanged(value: string, oldValue: string){
+export default class InputItem extends Vue{
+  @Prop({default: ''}) readonly value!: string;
+
+  @Prop({required:true}) fieldName!: string;
+  @Prop() placeholder?: string;
+
+  @Watch('value')
+  onValueChanged(value: string){
     this.$emit('update:value', value);
   }
 }
 </script>
 
 <style scoped lang="scss">
-.notes{
+.input-item{
   font-size: 14px;
   display: flex;
   padding-left: 16px;
   align-items: center;
-  .notes-label-text{
+  .input-item-text{
     padding-right: 16px;
   }
   input{
