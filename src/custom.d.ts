@@ -10,12 +10,14 @@ type Account = {
   time: Date
 }
 interface Window{
-  allAccounts: Account[];
-  addAccount: (Account)=>void;
-
-  allTags: Tag[];
-  addTag: (newTag:string)=>void;
-  removeTag: (tagId: number)=>boolean | undefined;
-  updateTag: (tagId: number, tagName: string) => void;
-  findTag: (tagId: number) => Tag;
+  // store: {
+  //   allAccounts: Account[];
+  //   addAccount: (Account)=>void;
+  //
+  //   allTags: Tag[];
+  //   addTag: (newTag:string)=>void;
+  //   removeTag: (tagId: number)=>boolean | undefined;
+  //   updateTag: (tagId: number, tagName: string) => void;
+  //   findTag: (tagId: number) => Tag;
+  // }
 }

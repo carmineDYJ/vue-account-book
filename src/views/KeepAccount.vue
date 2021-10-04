@@ -16,16 +16,16 @@ import Calculator from '@/components/KeepAccount/Calculator.vue';
 import Types from '@/components/KeepAccount/Types.vue';
 import InputItem from '@/components/InputItem.vue';
 import Tags from '@/components/KeepAccount/Tags.vue';
-import accountModel from '@/models/accountModel.ts';
-const allAccounts = accountModel.fetch();
+import store from '@/store/index2.ts';
+
 
 @Component({
   components: {Tags, InputItem, Types, Calculator},
 })
 export default class KeepAccount extends Vue{
-  allTags = window.allTags;
+  allTags = store.allTags;
   account: Account = {tags:[], notes: '', type: 'expenditure', sum:0, time: new Date(0)};
-  allAccounts = window.allAccounts;
+  allAccounts = store.allAccounts;
 
   onUpdateSelectedTags(value: string[]){
     this.account.tags = value;
@@ -34,7 +34,7 @@ export default class KeepAccount extends Vue{
     this.account.notes = value;
   }
   saveAccount(){
-    window.addAccount(this.account);
+    store.addAccount(this.account);
   }
 
 }

@@ -21,11 +21,12 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import InputItem from '@/components/InputItem.vue';
 import GeneralButton from '@/components/GeneralButton.vue';
+import store from '@/store/index2.ts';
 @Component({
   components: {GeneralButton, InputItem}
 })
 export default class TagEdit extends Vue{
-  tag: Tag = window.findTag(parseInt(this.$route.params.id));
+  tag: Tag = store.findTag(parseInt(this.$route.params.id));
 
   created(){
     if (!this.tag) {
@@ -35,14 +36,14 @@ export default class TagEdit extends Vue{
 
   updateTag(newTagName: string){
     if(this.tag){
-      window.updateTag(this.tag.tagId, newTagName);
+      store.updateTag(this.tag.tagId, newTagName);
     }
   }
 
   removeTag(){
     const deleteConfirm = window.confirm('确认要删除该标签吗？');
     if (deleteConfirm === true) {
-      if (window.removeTag(this.tag.tagId)) {
+      if (store.removeTag(this.tag.tagId)) {
         this.backToTags();
       } else {
         window.alert('标签删除失败！');

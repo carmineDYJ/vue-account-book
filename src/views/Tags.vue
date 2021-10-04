@@ -18,19 +18,19 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import tagModel from '@/models/tagModel.ts';
 import GeneralButton from '@/components/GeneralButton.vue';
+import store from '@/store/index2.ts';
 
 @Component({
   components: {GeneralButton}
 })
 export default class Tags extends Vue{
-  allTags = window.allTags;
+  allTags = store.allTags;
   addTag(){
     const newTag = window.prompt('请输入标签名');
 
     if (newTag !== null && newTag !== ''){
-      window.addTag(newTag);
+      store.addTag(newTag);
     }
   }
 }

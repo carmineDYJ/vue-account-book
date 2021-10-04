@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import tagModel from '@/models/tagModel.ts';
+import store from '@/store/index2.ts';
 
 
 @Component
@@ -34,7 +34,7 @@ export default class Tags extends Vue{
     const newTag = window.prompt('请输入标签名');
 
     if (newTag !== null && newTag !== ''){
-      window.addTag(newTag);
+      store.addTag(newTag);
     }
   }
 }
