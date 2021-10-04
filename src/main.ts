@@ -14,6 +14,9 @@ Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
 window.allTags = tagModel.fetch();
+window.findTag = (tagId: number)=>{
+  return window.allTags.filter(t => t.tagId === tagId)[0]
+}
 window.addTag = (newTag: string)=>{
     try {
       tagModel.add(newTag);
@@ -22,6 +25,19 @@ window.addTag = (newTag: string)=>{
         window.alert('此标签已存在');
       }
     }
+}
+window.removeTag = (tagId: number) => {
+  try {
+    tagModel.remove(tagId);
+    return true
+  } catch (error) {
+    if(error.message === 'delete tag fail') {
+      return false
+    }
+  }
+}
+window.updateTag = (tagId: number, tagName: string) => {
+  tagModel.update(tagId, tagName);
 }
 
 new Vue({

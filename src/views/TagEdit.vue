@@ -11,7 +11,7 @@
                  field-name="标签名" placeholder="请输入新的标签名"/>
     </div>
     <div class="delete-tag-button-wrapper">
-      <GeneralButton v-on:click="removeTag(tag.tagId)">删除标签</GeneralButton>
+      <GeneralButton v-on:click="removeTag()">删除标签</GeneralButton>
     </div>
   </Layout>
 </template>
@@ -19,37 +19,34 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import tagModel from '@/models/tagModel.ts';
 import InputItem from '@/components/InputItem.vue';
 import GeneralButton from '@/components/GeneralButton.vue';
 @Component({
   components: {GeneralButton, InputItem}
 })
 export default class TagEdit extends Vue{
-  tag?:{ tagId: number, tagName: string };
+  tag: Tag = window.findTag(parseInt(this.$route.params.id));
 
   created(){
-    const id = parseInt(this.$route.params.id);
-    tagModel.fetch();
-    const allTags = tagModel.allTags;
-    const tag = allTags.filter(tag => tag.tagId === id)[0];
-    if (!tag) {
+    if (!this.tag) {
       this.$router.replace('/404');
     }
-    this.tag = tag;
   }
 
   updateTag(newTagName: string){
     if(this.tag){
-      tagModel.update(this.tag.tagId, newTagName);
+      window.updateTag(this.tag.tagId, newTagName);
     }
   }
 
-  removeTag(tagId: number){
+  removeTag(){
     const deleteConfirm = window.confirm('确认要删除该标签吗？');
     if (deleteConfirm === true) {
-      tagModel.remove(tagId);
-      this.backToTags();
+      if (window.removeTag(this.tag.tagId)) {
+        this.backToTags();
+      } else {
+        window.alert('标签删除失败！');
+      }
     }
   }
 

@@ -17,7 +17,6 @@ import Types from '@/components/KeepAccount/Types.vue';
 import InputItem from '@/components/InputItem.vue';
 import Tags from '@/components/KeepAccount/Tags.vue';
 import accountModel from '@/models/accountModel.ts';
-
 const allAccounts = accountModel.fetch();
 
 @Component({

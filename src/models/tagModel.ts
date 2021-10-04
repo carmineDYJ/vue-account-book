@@ -51,6 +51,8 @@ const tagModel: TagModel = {
     if(index >= 0){
       this.allTags.splice(index, 1);
       this.save();
+    } else {
+      throw new Error('delete tag fail');
     }
   },
   save(){
