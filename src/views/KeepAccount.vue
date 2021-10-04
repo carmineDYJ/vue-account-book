@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Watch} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 import Calculator from '@/components/KeepAccount/Calculator.vue';
 import Types from '@/components/KeepAccount/Types.vue';
 import InputItem from '@/components/InputItem.vue';
@@ -25,7 +25,7 @@ const allAccounts = accountModel.fetch();
 export default class KeepAccount extends Vue{
   allTags = window.allTags;
   account: Account = {tags:[], notes: '', type: 'expenditure', sum:0, time: new Date(0)};
-  allAccounts: Account[] = allAccounts;
+  allAccounts = window.allAccounts;
 
   onUpdateSelectedTags(value: string[]){
     this.account.tags = value;
@@ -34,14 +34,9 @@ export default class KeepAccount extends Vue{
     this.account.notes = value;
   }
   saveAccount(){
-    accountModel.add(this.account);
+    window.addAccount(this.account);
   }
 
-  @Watch('allAccounts')
-  onAllAccountsChange(){
-    accountModel.save();
-    this.account.sum = 0; // 提交后重置金额
-  }
 }
 </script>
 

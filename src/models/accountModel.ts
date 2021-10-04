@@ -15,6 +15,7 @@ const accountModel = {
     const curAccount: Account = cloneDeep(account);
     curAccount.time = new Date();
     this.allAccounts.push(curAccount);
+    this.save();
   }
 };
 export default accountModel;
