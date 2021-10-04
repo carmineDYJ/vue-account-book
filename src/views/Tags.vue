@@ -30,13 +30,7 @@ export default class Tags extends Vue{
     const newTag = window.prompt('请输入标签名');
 
     if (newTag !== null && newTag !== ''){
-      try {
-        tagModel.add(newTag);
-      }catch (error){
-        if(error.message === 'duplicated tag') {
-          window.alert('此标签已存在');
-        }
-      }
+      window.addTag(newTag);
     }
   }
 }

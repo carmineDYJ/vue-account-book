@@ -10,5 +10,6 @@ type Account = {
   time: Date
 }
 interface Window{
-  allTags: Tag[]
+  allTags: Tag[];
+  addTag: (newTag:string)=>void;
 }

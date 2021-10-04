@@ -14,6 +14,15 @@ Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
 window.allTags = tagModel.fetch();
+window.addTag = (newTag: string)=>{
+    try {
+      tagModel.add(newTag);
+    }catch (error){
+      if(error.message === 'duplicated tag') {
+        window.alert('此标签已存在');
+      }
+    }
+}
 
 new Vue({
   router,
