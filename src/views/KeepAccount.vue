@@ -27,13 +27,13 @@ export default class KeepAccount extends Vue{
   account: Account = {tags:[], notes: '', type: 'expenditure', sum:0, time: new Date(0)};
   allAccounts = store.allAccounts;
 
-  onUpdateSelectedTags(value: string[]){
+  onUpdateSelectedTags(value: string[]): void{
     this.account.tags = value;
   }
-  onNotesContent(value: string){
+  onNotesContent(value: string): void{
     this.account.notes = value;
   }
-  saveAccount(){
+  saveAccount(): void{
     store.addAccount(this.account);
   }
 

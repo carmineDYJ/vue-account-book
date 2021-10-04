@@ -1,21 +1,24 @@
 import cloneDeep from 'lodash/cloneDeep';
 
 const localStorageKeyName = 'allAccounts';
-const accountModel = {
-  allAccounts: [] as Account[],
-  fetch(){
+
+const accountStore = {
+  allAccounts : [] as Account[],
+  fetchAllAccounts(){
     this.allAccounts = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as Account[];
     return this.allAccounts;
   },
-  save(){
+  saveAllAccounts(){
     localStorage.setItem(localStorageKeyName, JSON.stringify(this.allAccounts));
   },
-  add(account: Account){
-    // use lodash for deep cloning
-    const curAccount: Account = cloneDeep(account);
+  addAccount (account: Account) {
+    const curAccount = cloneDeep(account);
     curAccount.time = new Date();
     this.allAccounts.push(curAccount);
-    this.save();
-  }
-};
-export default accountModel;
+    accountStore.saveAllAccounts();
+  },
+}
+
+accountStore.fetchAllAccounts();
+
+export default accountStore;

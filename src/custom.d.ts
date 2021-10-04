@@ -7,9 +7,10 @@ type Account = {
   notes: string,
   type: string,
   sum: number,
-  time: Date
+  time: Date,
 }
-interface Window{
+
+interface Window {
   // store: {
   //   allAccounts: Account[];
   //   addAccount: (Account)=>void;

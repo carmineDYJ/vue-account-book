@@ -43,11 +43,7 @@ export default class TagEdit extends Vue{
   removeTag(){
     const deleteConfirm = window.confirm('确认要删除该标签吗？');
     if (deleteConfirm === true) {
-      if (store.removeTag(this.tag.tagId)) {
-        this.backToTags();
-      } else {
-        window.alert('标签删除失败！');
-      }
+      store.removeTag(this.tag.tagId);
     }
   }
 
