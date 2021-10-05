@@ -5,7 +5,7 @@
       <div class="notes-wrapper">
         <InputItem field-name="备注" placeholder="请在此处输入备注" v-on:update:value="onNotesContent"/>
       </div>
-      <Tags v-bind:all-tags.sync="allTags" v-on:update:value="onUpdateSelectedTags"/>
+      <Tags v-on:update:value="onUpdateSelectedTags"/>
     </Layout>
 </template>
 
@@ -21,11 +21,17 @@ import store from '@/store/index2.ts';
 
 @Component({
   components: {Tags, InputItem, Types, Calculator},
+  computed:{
+    allAccounts(){
+      return store.allAccounts;
+    },
+    allTags(){
+      return store.allTags;
+    }
+  }
 })
 export default class KeepAccount extends Vue{
-  allTags = store.allTags;
   account: Account = {tags:[], notes: '', type: 'expenditure', sum:0, time: new Date(0)};
-  allAccounts = store.allAccounts;
 
   onUpdateSelectedTags(value: string[]): void{
     this.account.tags = value;

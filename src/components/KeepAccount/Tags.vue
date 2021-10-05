@@ -19,7 +19,7 @@ import store from '@/store/index2.ts';
 
 @Component
 export default class Tags extends Vue{
-  @Prop({default: []}) readonly allTags!: Tag[];
+  allTags = store.fetchTags();
   selectedTags: string[] = [];
   toggleTag(tag: string){
     const tagIndex = this.selectedTags.indexOf(tag);
