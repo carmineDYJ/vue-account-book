@@ -14,13 +14,24 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import store from '@/store/index2.ts';
+import store from '@/store/index.ts';
+import {mixins} from 'vue-class-component';
+import {tagMixin} from '@/mixins/tagMixin';
 
-
-@Component
-export default class Tags extends Vue{
-  allTags = store.fetchTags();
+@Component({
+  computed: {
+    allTags(){
+      return store.state.allTags
+    }
+  }
+})
+export default class Tags extends mixins(tagMixin){
   selectedTags: string[] = [];
+
+  created(){
+    store.commit('fetchTags');
+  }
+
   toggleTag(tag: string){
     const tagIndex = this.selectedTags.indexOf(tag);
     if (tagIndex === -1){
@@ -29,13 +40,6 @@ export default class Tags extends Vue{
       this.selectedTags.splice(tagIndex, 1);
     }
     this.$emit('update:value', this.selectedTags);
-  }
-  addTag(){
-    const newTag = window.prompt('请输入标签名');
-
-    if (newTag !== null && newTag !== ''){
-      store.addTag(newTag);
-    }
   }
 }
 </script>

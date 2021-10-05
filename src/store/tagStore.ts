@@ -15,7 +15,7 @@ const tagStore = {
     const allTagNames = this.allTags.map(tag => tag.tagName);
     if (allTagNames.indexOf(tagName) === -1){
       const id = generateId();
-      this.allTags.push({tagId: id,tagName: tagName});
+      this.allTags.push({tagId: id, tagName: tagName});
       this.saveTags();
     } else {
       window.alert('此标签已存在');

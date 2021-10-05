@@ -19,19 +19,21 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import GeneralButton from '@/components/GeneralButton.vue';
-import store from '@/store/index2.ts';
+import store from '@/store/index.ts';
+import {mixins} from 'vue-class-component';
+import {tagMixin} from '@/mixins/tagMixin';
 
 @Component({
-  components: {GeneralButton}
-})
-export default class Tags extends Vue{
-  allTags = store.allTags;
-  addTag(){
-    const newTag = window.prompt('请输入标签名');
-
-    if (newTag !== null && newTag !== ''){
-      store.addTag(newTag);
+  components: {GeneralButton},
+  computed: {
+    allTags() {
+      return store.state.allTags;
     }
+  }
+})
+export default class Tags extends mixins(tagMixin){
+  created(){
+    store.commit('fetchTags');
   }
 }
 </script>
