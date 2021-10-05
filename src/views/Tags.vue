@@ -25,13 +25,12 @@ import {tagMixin} from '@/mixins/tagMixin';
 
 @Component({
   components: {GeneralButton},
-  computed: {
-    allTags() {
-      return store.state.allTags;
-    }
-  }
 })
 export default class Tags extends mixins(tagMixin){
+  get allTags() {
+    return store.state.allTags
+  }
+
   created(){
     store.commit('fetchTags');
   }

@@ -21,29 +21,38 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import InputItem from '@/components/InputItem.vue';
 import GeneralButton from '@/components/GeneralButton.vue';
-import store from '@/store/index2.ts';
+import store from '@/store/index';
+
 @Component({
-  components: {GeneralButton, InputItem}
+  components: {GeneralButton, InputItem},
 })
 export default class TagEdit extends Vue{
-  tag: Tag = store.findTag(parseInt(this.$route.params.id));
+  tagOriginName: string | undefined
+
+  get tag(){
+    return store.state.curTag;
+  }
 
   created(){
+    store.commit('fetchTags');
+    store.commit('findTag', parseInt(this.$route.params.id));
     if (!this.tag) {
       this.$router.replace('/404');
     }
+    this.tagOriginName = this.tag.tagName;
   }
 
   updateTag(newTagName: string){
     if(this.tag){
-      store.updateTag(this.tag.tagId, newTagName);
+      store.commit('updateTag', {tagId: this.tag.tagId, tagName: newTagName});
     }
   }
 
   removeTag(){
     const deleteConfirm = window.confirm('确认要删除该标签吗？');
     if (deleteConfirm === true) {
-      store.removeTag(this.tag.tagId);
+      store.commit('removeTag', this.tag.tagId)
+      this.backToTags();
     }
   }
 

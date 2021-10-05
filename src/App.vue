@@ -4,17 +4,17 @@
   </div>
 </template>
 
-<script lang="js">
-  import store from '@/store/index2';
-  // 令store被全局监听
-  export default {
-    data(){
-      return {
-        store: store
-      }
-    }
-  }
-</script>
+<!--<script lang="js">-->
+<!--  import store from '@/store/index2';-->
+<!--  // 令我的store被全局监听-->
+<!--  export default {-->
+<!--    data(){-->
+<!--      return {-->
+<!--        store: store-->
+<!--      }-->
+<!--    }-->
+<!--  }-->
+<!--</script>-->
 
 <style lang="scss">
 @import "~@/assets/style/reset.scss";

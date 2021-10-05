@@ -18,14 +18,12 @@ import store from '@/store/index.ts';
 import {mixins} from 'vue-class-component';
 import {tagMixin} from '@/mixins/tagMixin';
 
-@Component({
-  computed: {
-    allTags(){
-      return store.state.allTags
-    }
-  }
-})
+@Component
 export default class Tags extends mixins(tagMixin){
+  get allTags() {
+    return store.state.allTags
+  }
+
   selectedTags: string[] = [];
 
   created(){

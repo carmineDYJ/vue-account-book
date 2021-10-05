@@ -9,6 +9,7 @@ const store = new Vuex.Store({
   state: {
     allAccounts: [] as Account[],
     allTags: [] as Tag[],
+    curTag: {tagId: -1, tagName: "not tag"} as Tag, // 消除ts警告
   },
   mutations: {
     fetchAllAccounts(state) {
@@ -27,7 +28,7 @@ const store = new Vuex.Store({
       state.allTags = JSON.parse(window.localStorage.getItem('allTags') || '[]');
     },
     findTag(state, tagId: number) {
-      return state.allTags.filter(t => t.tagId === tagId)[0];
+      state.curTag = state.allTags.filter(t => t.tagId === tagId)[0];
     },
     addTag(state, tagName: string) {
       const allTagNames = state.allTags.map(tag => tag.tagName);
@@ -51,7 +52,8 @@ const store = new Vuex.Store({
         throw new Error('delete tag fail');
       }
     },
-    updateTag(state, tagId: number, tagName: string) {
+    updateTag(state, payload: {tagId: number, tagName: string}) {
+      const {tagId, tagName} = payload;
       const allId = state.allTags.map(tag => tag.tagId);
       if (allId.indexOf(tagId) >= 0) {
         const allTagNames = state.allTags.map(tag => tag.tagName);
